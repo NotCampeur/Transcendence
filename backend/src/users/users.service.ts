@@ -16,7 +16,8 @@ type UserRelations =
   | 'friends'
   | 'friendRequestsSent'
   | 'friendRequestsReceived'
-  | 'blockedUsers';
+  | 'blockedUsers'
+  | 'matches';
 
 @Injectable()
 export class UsersService {
@@ -144,6 +145,13 @@ export class UsersService {
       )}/users/image/` + file.filename;
     await this.usersRepository.save(user);
     return user;
+  }
+
+  async getUserMatches(login42: string) {
+    const user = await this.getUserWithRelations(login42, ['matches']);
+    console.log('matches = ', user.matches);
+    
+    return user.matches;
   }
 
   async updateUserElo(login42: string, elo: number): Promise<User> {

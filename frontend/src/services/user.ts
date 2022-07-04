@@ -36,18 +36,20 @@ const getUserFriends = (login: string) => {
 };
 
 const updateUserImage = (login: string, file: FormData) => {
-  const request = axios.post(
-    `${baseUrl}/${login}/image`,
-    file,
-    {
-      headers: { "Content-Type": "multipart/form-data" },
-    }
-  );
+  const request = axios.post(`${baseUrl}/${login}/image`, file, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
   return request
     .then((response) => response.data)
     .catch((e) => {
       console.error(e);
     });
+};
+
+const getUserMatches = (login42: string) => {
+  return axios
+    .get(`${baseUrl}/${login42}/matches`)
+    .then((response) => response.data);
 };
 
 const getUserFriendRequestsSent = (login: string) => {
@@ -139,6 +141,7 @@ export default {
   removeFriend,
   updateUserUsername,
   updateUserImage,
+  getUserMatches,
   getUserBlockedUsers,
   blockUser,
   unblockUser,

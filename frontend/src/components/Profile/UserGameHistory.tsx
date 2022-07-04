@@ -3,7 +3,7 @@ import React from "react";
 import emptyHistory from "../../public/sword-cross.png";
 import styles from "../../styles/Home.module.css";
 import { CardMatchHistory } from "../Cards/CardMatchHistory";
-import matchService from "../../services/match";
+import userService from "../../services/user";
 import { Match } from "../../interfaces/match";
 
 import { errorHandler } from "../../errors/errorHandler";
@@ -23,8 +23,8 @@ function GameList({ userLogin }: { userLogin: string }) {
     if (
       userLogin !== defaultSessionState.userSelf.login42
     ) {
-      matchService
-        .getForOneUser(userLogin)
+      userService
+        .getUserMatches(userLogin)
         .then((matches: Match[]) => {
           setMatches(matches);
         })

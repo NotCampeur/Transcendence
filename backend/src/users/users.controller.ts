@@ -84,6 +84,12 @@ export class UsersController {
     return new StreamableFile(file);
   }
 
+  @Get('/:login42/matches')
+  @UseGuards(JwtAuthGuard)
+  getUserMatches(@Param('login42') login42: string) {
+    return this.usersService.getUserMatches(login42);
+  }
+
   @Get('/:login42/friends')
   @UseGuards(JwtAuthGuard)
   getUserFriends(
